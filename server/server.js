@@ -6,7 +6,7 @@ var {mongoose}=require('./db/mongoose')
 var {Todo}=require('./models/todo')
 var {User}=require('./models/user')
 
-
+const port=process.env.PORT ||3000
 var app=express();
 app.use(bodyParser.json())
 
@@ -20,16 +20,6 @@ app.post('/todos',(req,res)=>{
     res.send(e);
   })
 })
-// app.post('/users',(req,res)=>{
-//   var users=new User({
-//     email:req.body.email
-//   })
-//   users.save().then((doc)=>{
-//     res.send(doc)
-//   },(e)=>{
-//     res.send(e)
-//   })
-// })
 app.get('/todos',(req,res)=>{
   Todo.find().then((doc)=>{
     res.send({doc})
@@ -53,6 +43,6 @@ app.get("/todos/:id",(req,res)=>{
 
 })
 
-app.listen(3000,()=>{
-  console.log("Started on 3000");
+app.listen(port,()=>{
+  console.log(`Started up at port ${port}`);
 })
